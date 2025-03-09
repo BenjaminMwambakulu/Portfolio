@@ -3,7 +3,7 @@ import { navigation } from "../Essentials/content";
 
 function Navigation() {
   return (
-    <nav className="flex justify-center items-center gap-12 py-2 fixed top-2 left-1/2 -translate-x-1/2">
+    <nav className="flex justify-center items-center gap-12 py-2 fixed top-2 left-1/2 -translate-x-1/2  backdrop-blur-3xl z-20 px-2 rounded-full">
       <div className="flex justify-center items-center gap-1.5">
         <span className="text-lg p-4 w-10 h-10 rounded-full text-white bg-blue-500 font-bold flex justify-center items-center">
           B

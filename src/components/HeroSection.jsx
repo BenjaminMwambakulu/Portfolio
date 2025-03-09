@@ -6,10 +6,10 @@ function HeroSection() {
     <>
       <section className="w-full flex flex-col justify-center items-center h-screen ">
         <div className="w-2/3 relative">
-          <h1 className="text-6xl mb-5 text-center title">
+          <h1 className="text-6xl mb-5 text-center font-mono">
             {heroSectionText[0].title}
           </h1>
-          <p className="text-2xl mb-5 text-center">
+          <p className="text-2xl mb-5 text-center text-gray-300">
             {heroSectionText[0].subtitle}
           </p>
           <div className="flex justify-center items-center w-full gap-x-2.5">

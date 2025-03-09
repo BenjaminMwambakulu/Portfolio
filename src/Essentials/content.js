@@ -9,7 +9,32 @@ export { navigation };
 const heroSectionText = [
     {
         title: "Hi, Im Benjamin, a Full Stack Student Developer",
-        subtitle: "I'm a Full Stack Developer, I love to create beautiful and functional websites. I'm always looking for new challenges and opportunities to learn and grow."
+        subtitle: "Full-Stack Developer | Passionate about Web & Software Development",
     }
 ]
-export {heroSectionText};
+export { heroSectionText };
+
+const aboutMe = [
+    {
+        title: "About Me",
+        subtitle: "I am Benjamin Mwambakulu, a Student a Malawi University of Malawi(MUST). I am currently in my third year of my bachelor degree in Business Information Technology.  I specialize in PHP, CSS, HTML, JS, and React. Currently, I'm expanding my skills by learning Laravel.",
+        skills: {
+            Backend: [
+                "PHP",
+                "Laravel",
+                "MySQL",
+            ],
+            Frontend: [
+                "HTML",
+                "CSS",
+                "JS",
+                "React",
+                "Tailwind"
+            ],
+
+        },
+
+    }
+]
+
+export { aboutMe };
