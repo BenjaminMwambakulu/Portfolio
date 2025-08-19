@@ -20,27 +20,25 @@ const aboutMe = [
         subtitle: "I am Benjamin Mwambakulu, a Student a Malawi University of Malawi(MUST). I am currently in my third year of my bachelor degree in Business Information Technology.  I specialize in PHP, CSS, HTML, JS, and React. Currently, I'm expanding my skills by learning Laravel.",
         skills: {
             Backend: [
-                "PHP",
-                "Laravel",
-                "MySQL",
-                "Supabase"
+                { name: "PHP", icon: "php-icon.png" },
+                { name: "Laravel", icon: "laravel-icon.png" },
+                { name: "MySQL", icon: "mysql-icon.png" },
+                { name: "Supabase", icon: "supabase-icon.png" }
             ],
             Frontend: [
-                "HTML",
-                "CSS",
-                "JS",
-                "React",
-                "TailwindCC"
+                { name: "HTML", icon: "html-icon.png" },
+                { name: "CSS", icon: "css-icon.png" },
+                { name: "JS", icon: "javascript-icon.png" },
+                { name: "React", icon: "react-icon.png" },
+                { name: "TailwindCC", icon: "tailwind-icon.png" }
             ],
             Tools: [
-                "Git",
-                "Github",
-                "VS Code",                
-                "Figma"
+                { name: "Git", icon: "git-icon.png" },
+                { name: "Github", icon: "github-icon.png" },
+                { name: "VS Code", icon: "vscode-icon.png" },
+                { name: "Figma", icon: "figma-icon.png" }
             ]
-
         },
-
     }
 ]
 

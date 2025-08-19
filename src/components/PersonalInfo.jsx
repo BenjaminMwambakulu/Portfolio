@@ -6,8 +6,9 @@ function PersonalInfo() {
 
   const renderSkills = (skills) => {
     return skills.map((skill, index) => (
-      <li key={index} className="bg-gray-700 px-3 py-1 rounded-full">
-        {skill}
+      <li key={index} className="flex items-center gap-2 bg-gray-700 px-3 py-1 rounded-full">
+        <img src={`/src/assets/icons/${skill.icon}`} alt={skill.name} className="w-5 h-5" />
+        <span>{skill.name}</span>
       </li>
     ));
   };
