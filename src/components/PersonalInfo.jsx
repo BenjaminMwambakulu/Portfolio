@@ -72,7 +72,11 @@ function PersonalInfo() {
         </div>
       </div>
       <div className="flex justify-center items-center w-1/2 max-w-1/2">
-        <img src={importImage("profile.JPG")} className="rounded-2xl" alt="" />
+        <img
+          src={importImage("profile.jpg")}
+          className="rounded-2xl w-7/12 h-96 object-cover object-top"
+          alt=""
+        />
       </div>
     </div>
   );
