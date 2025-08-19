@@ -7,7 +7,7 @@ import Contact from "./components/Contact";
 
 function App() {
   return (
-    <div className="p-6">
+    <div className="min-h-screen">
       <Navigation />
       <HeroSection />
       <PersonalInfo />
