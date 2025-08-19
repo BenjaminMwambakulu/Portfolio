@@ -67,7 +67,7 @@ function Contact() {
       setSubmitStatus("success");
       setSubmitMessage("Message sent successfully! I'll get back to you soon.");
       setFormData({ name: "", email: "", subject: "", message: "" });
-      
+
       // Reset status after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null);
@@ -79,7 +79,7 @@ function Contact() {
       setIsSubmitting(false);
       setSubmitStatus("error");
       setSubmitMessage("Failed to send message. Please try again or contact me directly via email.");
-      
+
       // Reset status after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null);
@@ -89,8 +89,8 @@ function Contact() {
   };
 
   return (
-    <motion.section 
-      id="contact" 
+    <motion.section
+      id="contact"
       className="w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 relative"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -100,83 +100,83 @@ function Contact() {
       {/* Futuristic Background Elements */}
       <div className="absolute inset-0 overflow-hidden -z-10">
         {/* Animated Gradient Orbs */}
-        <motion.div 
+        <motion.div
           className="absolute top-10 left-4 sm:left-10 lg:left-20"
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.1 }}
         >
-          <motion.div 
+          <motion.div
             className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full blur-3xl opacity-15"
-            animate={{ 
+            animate={{
               scale: [1, 1.1, 1],
               rotate: [0, 180, 360]
             }}
-            transition={{ 
-              duration: 4, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           />
-          <motion.div 
+          <motion.div
             className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-blue-500 rounded-full blur-2xl opacity-25 absolute top-4 left-4"
-            animate={{ 
+            animate={{
               y: [0, -10, 0],
               scale: [1, 1.05, 1]
             }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           />
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="absolute bottom-20 right-4 sm:right-6 lg:right-10"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.2 }}
         >
-          <motion.div 
+          <motion.div
             className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full blur-3xl opacity-20"
-            animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
               opacity: [0.2, 0.25, 0.2]
             }}
-            transition={{ 
-              duration: 3, 
-              repeat: Infinity, 
+            transition={{
+              duration: 3,
+              repeat: Infinity,
               ease: "easeInOut"
             }}
           />
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="absolute top-1/2 right-1/4 sm:right-1/3"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.3 }}
         >
-          <motion.div 
+          <motion.div
             className="w-22 h-22 sm:w-30 sm:h-30 lg:w-36 lg:h-36 bg-gradient-to-r from-indigo-500 to-blue-800 rounded-full blur-3xl opacity-10"
-            animate={{ 
+            animate={{
               scale: [1, 1.05, 1],
               rotate: [0, -180, -360]
             }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity, 
+            transition={{
+              duration: 6,
+              repeat: Infinity,
               ease: "easeInOut"
             }}
           />
         </motion.div>
-        
+
         {/* Circuit Pattern */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-5"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.05 }}
@@ -186,42 +186,42 @@ function Contact() {
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <defs>
               <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 0 10 L 10 10 L 10 0 M 10 10 L 20 10 M 10 10 L 10 20" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="0.5" fill="none"/>
+                <path d="M 0 10 L 10 10 L 10 0 M 10 10 L 20 10 M 10 10 L 10 20" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="0.5" fill="none" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#circuit)"/>
+            <rect width="100%" height="100%" fill="url(#circuit)" />
           </svg>
         </motion.div>
-        
+
         {/* Scanning Effect */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.3 }}
         >
-          <motion.div 
+          <motion.div
             className="w-full h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent absolute top-1/3"
-            animate={{ 
+            animate={{
               scaleX: [0, 1, 0],
               opacity: [0, 1, 0]
             }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           />
-          <motion.div 
+          <motion.div
             className="w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent absolute top-2/3"
-            animate={{ 
+            animate={{
               scaleX: [0, 1, 0],
               opacity: [0, 1, 0]
             }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
+            transition={{
+              duration: 2,
+              repeat: Infinity,
               ease: "easeInOut",
               delay: 1
             }}
@@ -231,14 +231,14 @@ function Contact() {
 
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
-          <motion.h2 
+          <motion.h2
             className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-4 sm:mb-6 text-white"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -247,7 +247,7 @@ function Contact() {
           >
             {contactInfo.title}
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -260,7 +260,7 @@ function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact Information */}
-          <motion.div 
+          <motion.div
             className="space-y-6 sm:space-y-8"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -268,7 +268,7 @@ function Contact() {
             transition={{ duration: 0.4, delay: 0.2 }}
           >
             <div>
-              <motion.h3 
+              <motion.h3
                 className="text-xl sm:text-2xl font-mono font-bold mb-4 sm:mb-6 text-white text-center lg:text-left"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -277,7 +277,7 @@ function Contact() {
               >
                 Get In Touch
               </motion.h3>
-              
+
               {/* Contact Details */}
               <div className="space-y-4">
                 {[
@@ -300,20 +300,20 @@ function Contact() {
                     href: null
                   }
                 ].map((item, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                    whileHover={{ 
-                      scale: 1.02, 
+                    whileHover={{
+                      scale: 1.02,
                       borderColor: "rgba(59, 130, 246, 0.5)",
                       boxShadow: "0 4px 20px rgba(59, 130, 246, 0.1)"
                     }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
@@ -324,8 +324,8 @@ function Contact() {
                     <div className="min-w-0 flex-1">
                       <p className="text-gray-400 text-xs sm:text-sm">{item.label}</p>
                       {item.href ? (
-                        <motion.a 
-                          href={item.href} 
+                        <motion.a
+                          href={item.href}
                           className="text-white hover:text-blue-400 transition-colors text-sm sm:text-base break-all"
                           whileHover={{ x: 5 }}
                         >
@@ -347,7 +347,7 @@ function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.3 }}
             >
-              <motion.h4 
+              <motion.h4
                 className="text-base sm:text-lg font-mono font-semibold mb-3 sm:mb-4 text-white text-center lg:text-left"
                 initial={{ opacity: 0, x: -15 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -367,13 +367,13 @@ function Contact() {
                     initial={{ opacity: 0, scale: 0, rotate: -90 }}
                     whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
-                    transition={{ 
-                      duration: 0.3, 
+                    transition={{
+                      duration: 0.3,
                       delay: 0.1 + index * 0.05,
                       ease: "easeOut"
                     }}
-                    whileHover={{ 
-                      scale: 1.2, 
+                    whileHover={{
+                      scale: 1.2,
                       y: -5,
                       boxShadow: "0 8px 25px rgba(59, 130, 246, 0.3)"
                     }}
@@ -399,29 +399,29 @@ function Contact() {
             </motion.div>
 
             {/* Availability Status */}
-            <motion.div 
+            <motion.div
               className="p-3 sm:p-4 bg-green-500/10 border border-green-500/30 rounded-xl"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.4 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.02,
                 borderColor: "rgba(34, 197, 94, 0.5)",
                 boxShadow: "0 4px 20px rgba(34, 197, 94, 0.1)"
               }}
             >
               <div className="flex items-center gap-2 justify-center lg:justify-start">
-                <motion.div 
+                <motion.div
                   className="w-3 h-3 bg-green-400 rounded-full"
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.1, 1],
                     opacity: [1, 0.7, 1]
                   }}
-                  transition={{ 
-                    duration: 1.5, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }}
                 />
                 <p className="text-green-400 font-semibold text-sm sm:text-base">{contactInfo.availability}</p>
@@ -430,25 +430,25 @@ function Contact() {
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div 
+          <motion.div
             className="relative bg-gray-900/40 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-700/30 hover:border-blue-500/30 transition-all duration-500 overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.3 }}
-            whileHover={{ 
+            whileHover={{
               borderColor: "rgba(59, 130, 246, 0.5)",
               boxShadow: "0 8px 32px rgba(59, 130, 246, 0.1)"
             }}
           >
             {/* Form Glow Effect */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-cyan-500/5 opacity-0 rounded-2xl"
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             />
-            
-            <motion.h3 
+
+            <motion.h3
               className="relative text-xl sm:text-2xl font-mono font-bold mb-4 sm:mb-6 text-transparent bg-gradient-to-r from-white to-gray-300 bg-clip-text text-center lg:text-left"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -457,7 +457,7 @@ function Contact() {
             >
               Send Me a Message
             </motion.h3>
-            
+
             <form onSubmit={handleSubmit} className="relative space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="group">
@@ -475,7 +475,7 @@ function Contact() {
                     placeholder="Your Name"
                   />
                 </div>
-                
+
                 <div className="group">
                   <label htmlFor="email" className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors">
                     Email *
@@ -547,19 +547,17 @@ function Contact() {
               </button>
 
               {submitStatus && (
-                <motion.div 
-                  className={`p-3 sm:p-4 rounded-lg border ${
-                    submitStatus === "success" 
-                      ? "bg-green-500/10 border-green-500/30" 
-                      : "bg-red-500/10 border-red-500/30"
-                  }`}
+                <motion.div
+                  className={`p-3 sm:p-4 rounded-lg border ${submitStatus === "success"
+                    ? "bg-green-500/10 border-green-500/30"
+                    : "bg-red-500/10 border-red-500/30"
+                    }`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className={`text-center font-semibold text-sm sm:text-base ${
-                    submitStatus === "success" ? "text-green-400" : "text-red-400"
-                  }`}>
+                  <p className={`text-center font-semibold text-sm sm:text-base ${submitStatus === "success" ? "text-green-400" : "text-red-400"
+                    }`}>
                     {submitMessage}
                   </p>
                 </motion.div>

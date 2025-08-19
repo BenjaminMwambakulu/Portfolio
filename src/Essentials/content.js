@@ -55,7 +55,7 @@ const projects = [
         liveUrl: "https://example.com",
         githubUrl: "https://github.com/username/ecommerce",
         gitHub: false,
-        live: true,
+        live: false,
         featured: false,
         category: "Frontend"
     },

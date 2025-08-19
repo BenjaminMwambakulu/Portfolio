@@ -1,0 +1,21 @@
+# Netlify redirects for SPA routing
+# Redirect all routes to index.html for client-side routing
+/*    /index.html   200
+
+# Specific redirects for common 404 cases
+/home    /    301
+/portfolio    /    301
+/about    /#about    301
+/projects    /#projects    301
+/resume    /#resume    301
+/contact    /#contact    301
+
+# Handle API routes (if any in the future)
+/api/*    /api/:splat    200
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
