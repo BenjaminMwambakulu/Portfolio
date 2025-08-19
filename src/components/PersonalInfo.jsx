@@ -75,7 +75,7 @@ function PersonalInfo() {
         <img
           src={importImage("profile.jpg")}
           className="rounded-2xl w-7/12 h-96 object-cover object-top"
-          alt=""
+          alt="profile image"
         />
       </div>
     </div>
