@@ -104,30 +104,48 @@ function Projects() {
         viewport={{ once: true }}
         transition={{ delay: 0.25 + index * 0.05, duration: 0.3 }}
       >
-        <motion.a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/btn relative flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 sm:py-3 rounded-lg text-sm font-semibold text-center overflow-hidden shadow-lg"
-          whileHover={{ scale: 1.02, y: -1 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ duration: 0.15 }}
-        >
-          <span className="relative z-10">Live Demo</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/15 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
-        </motion.a>
-        <motion.a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/btn relative flex-1 border-2 border-blue-500/50 text-blue-400 hover:text-white px-4 py-2 sm:py-3 rounded-lg text-sm font-semibold text-center backdrop-blur-sm hover:bg-blue-500/10 overflow-hidden"
-          whileHover={{ scale: 1.02, y: -1 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ duration: 0.15 }}
-        >
-          <span className="relative z-10">GitHub</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
-        </motion.a>
+        {project.live ? (
+          <motion.a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/btn relative flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 sm:py-3 rounded-lg text-sm font-semibold text-center overflow-hidden shadow-lg"
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.15 }}
+          >
+            <span className="relative z-10">Live Demo</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/15 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
+          </motion.a>
+        ) : (
+          <motion.button
+            disabled
+            className="flex-1 bg-gray-600 text-gray-400 px-4 py-2 sm:py-3 rounded-lg text-sm font-semibold text-center cursor-not-allowed opacity-50"
+          >
+            Live Demo (Unavailable)
+          </motion.button>
+        )}
+        {project.gitHub ? (
+          <motion.a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/btn relative flex-1 border-2 border-blue-500/50 text-blue-400 hover:text-white px-4 py-2 sm:py-3 rounded-lg text-sm font-semibold text-center backdrop-blur-sm hover:bg-blue-500/10 overflow-hidden"
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.15 }}
+          >
+            <span className="relative z-10">GitHub</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
+          </motion.a>
+        ) : (
+          <motion.button
+            disabled
+            className="flex-1 border-2 border-gray-600 text-gray-500 px-4 py-2 sm:py-3 rounded-lg text-sm font-semibold text-center cursor-not-allowed opacity-50"
+          >
+            GitHub (Private)
+          </motion.button>
+        )}
       </motion.div>
     </motion.div>
   );
