@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { aboutMe } from "../Essentials/content";
+import { importImage } from "../Essentials/getImages";
 
 function PersonalInfo() {
   const [activeTab, setActiveTab] = useState("Backend");
 
   const renderSkills = (skills) => {
     return skills.map((skill, index) => (
-      <li key={index} className="flex items-center gap-2 bg-gray-700 px-3 py-1 rounded-full">
-        <img src={`/src/assets/icons/${skill.icon}`} alt={skill.name} className="w-5 h-5" />
+      <li
+        key={index}
+        className="flex items-center gap-2 bg-gray-600 px-3 py-1 rounded-full"
+      >
+        <img
+          src={importImage(skill.icon)}
+          alt={skill.name}
+          className="w-5 h-5"
+        />
         <span>{skill.name}</span>
       </li>
     ));
@@ -64,11 +72,7 @@ function PersonalInfo() {
         </div>
       </div>
       <div className="flex justify-center items-center w-1/2 max-w-1/2">
-        <img
-          src="https://picsum.photos/200/300"
-          className="rounded-2xl"
-          alt=""
-        />
+        <img src={importImage("profile.JPG")} className="rounded-2xl" alt="" />
       </div>
     </div>
   );
