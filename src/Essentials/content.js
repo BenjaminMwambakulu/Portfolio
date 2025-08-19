@@ -2,6 +2,7 @@ const navigation = [
     { title: "Home", ref: "#home" },
     { title: "Projects", ref: "#projects" },
     { title: "About", ref: "#about" },
+    { title: "Resume", ref: "#resume" },
     { title: "Contact", ref: "#contact" }
 ]
 export { navigation };
