@@ -23,14 +23,21 @@ const aboutMe = [
                 "PHP",
                 "Laravel",
                 "MySQL",
+                "Supabase"
             ],
             Frontend: [
                 "HTML",
                 "CSS",
                 "JS",
                 "React",
-                "Tailwind"
+                "TailwindCC"
             ],
+            Tools: [
+                "Git",
+                "Github",
+                "VS Code",                
+                "Figma"
+            ]
 
         },
 

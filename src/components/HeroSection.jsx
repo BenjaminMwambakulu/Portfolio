@@ -15,13 +15,13 @@ function HeroSection() {
           <div className="flex justify-center items-center w-full gap-x-2.5">
             <a
               href=""
-              className="bg-blue-500 hover:bg-blue-600 rounded-xl px-2 py-1 text-xl transition-all"
+              className="bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 text-xl transition-all"
             >
               Let's Talk
             </a>
             <a
               href=""
-              className="bg-none border border-blue-500 hover:bg-blue-500 rounded-xl px-2 py-1 text-xl transition-all"
+              className="bg-none border border-blue-500 hover:bg-blue-500/10 rounded-xl px-4 py-2 text-xl transition-all"
             >
               View my Work
             </a>
