@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase"; // existing Firestore config
 import { motion } from "motion/react";
+import profileImg from "../assets/icons/profile.jpg"; // fallback watermark image (matches About section)
 
 function HeroSection() {
   // Firestore state for hero section
   const [heroData, setHeroData] = useState(null);
+  const [watermarkUrl, setWatermarkUrl] = useState(profileImg);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -33,6 +35,16 @@ function HeroSection() {
               "Full-Stack Developer | Passionate about Web & Software Development",
           });
         }
+
+        // Fetch About section image to use as watermark (keeps hero and about in sync)
+        const aboutRef = doc(db, "sectionData", "aboutSection");
+        const aboutSnap = await getDoc(aboutRef);
+        if (aboutSnap.exists()) {
+          const aboutImage = aboutSnap.data().imageUrl;
+          if (aboutImage) {
+            setWatermarkUrl(aboutImage);
+          }
+        }
       } catch (err) {
         console.error("Error fetching hero section from Firestore:", err);
         setError("Unable to load hero content.");
@@ -42,6 +54,7 @@ function HeroSection() {
           subtitle:
             "Full-Stack Developer | Passionate about Web & Software Development",
         });
+        setWatermarkUrl(profileImg);
       } finally {
         setLoading(false);
       }
@@ -54,6 +67,28 @@ function HeroSection() {
     <section id="home" className="relative w-full flex flex-col justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8 pt-20 overflow-hidden">
       {/* Simplified Futuristic Decorative Elements */}
       <div className="absolute inset-0 -z-10 w-full h-full overflow-hidden">
+        {/* Subtle profile watermark */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.12 }}
+          transition={{ duration: 1.4, delay: 0.6 }}
+        >
+          <div
+            className="w-[28rem] sm:w-[34rem] lg:w-[42rem] aspect-[3/4] bg-center bg-cover rounded-[48%] blur-[1px]"
+            style={{
+              backgroundImage: `url(${watermarkUrl})`,
+              maskImage:
+                "radial-gradient(circle at center, rgba(0,0,0,0.7), transparent 75%)",
+              WebkitMaskImage:
+                "radial-gradient(circle at center, rgba(0,0,0,0.7), transparent 75%)",
+              opacity: 0.95,
+              filter: "saturate(0.9)",
+            }}
+          />
+        </motion.div>
+
         {/* Main Orb - Top Right */}
         <motion.div
           className="absolute top-20 right-8 sm:top-24 sm:right-16 lg:top-32 lg:right-24"
