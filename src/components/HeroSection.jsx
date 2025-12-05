@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../config/firebase"; // existing Firestore config
 import { motion } from "motion/react";
 import profileImg from "../assets/icons/profile.jpg"; // fallback watermark image (matches About section)
@@ -64,7 +71,10 @@ function HeroSection() {
   }, []);
 
   return (
-    <section id="home" className="relative w-full flex flex-col justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8 pt-20 overflow-hidden">
+    <section
+      id="home"
+      className="relative w-full flex flex-col justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8 pt-20 overflow-hidden"
+    >
       {/* Simplified Futuristic Decorative Elements */}
       <div className="absolute inset-0 -z-10 w-full h-full overflow-hidden">
         {/* Subtle profile watermark */}
@@ -100,12 +110,12 @@ function HeroSection() {
             className="w-40 h-40 sm:w-56 sm:h-56 lg:w-72 lg:h-72 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.1, 1],
-              rotate: [0, 180, 360]
+              rotate: [0, 180, 360],
             }}
             transition={{
               duration: 12,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
         </motion.div>
@@ -121,13 +131,13 @@ function HeroSection() {
             className="w-32 h-32 sm:w-44 sm:h-44 lg:w-56 lg:h-56 bg-gradient-to-r from-indigo-500/15 to-purple-600/15 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.15, 0.25, 0.15]
+              opacity: [0.15, 0.25, 0.15],
             }}
             transition={{
               duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 1
+              delay: 1,
             }}
           />
         </motion.div>
@@ -139,10 +149,13 @@ function HeroSection() {
           animate={{ opacity: 0.03 }}
           transition={{ duration: 2, delay: 1.5 }}
         >
-          <div className="w-full h-full" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.4) 1px, transparent 0)`,
-            backgroundSize: '60px 60px'
-          }}></div>
+          <div
+            className="w-full h-full"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.4) 1px, transparent 0)`,
+              backgroundSize: "60px 60px",
+            }}
+          ></div>
         </motion.div>
 
         {/* Single Scanning Line */}
@@ -156,13 +169,13 @@ function HeroSection() {
             className="w-full h-px bg-gradient-to-r from-transparent via-blue-400/60 to-transparent absolute top-2/3"
             animate={{
               scaleX: [0, 1, 0],
-              opacity: [0, 0.8, 0]
+              opacity: [0, 0.8, 0],
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
               ease: "easeInOut",
-              repeatDelay: 2
+              repeatDelay: 2,
             }}
           />
         </motion.div>
@@ -185,13 +198,13 @@ function HeroSection() {
               animate={{
                 y: [0, -15, 0],
                 opacity: [0.4, 0.8, 0.4],
-                scale: [1, 1.2, 1]
+                scale: [1, 1.2, 1],
               }}
               transition={{
                 duration: 4 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 3,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             />
           ))}
@@ -256,9 +269,7 @@ function HeroSection() {
 
         {/* Optional non-intrusive error text within existing layout */}
         {error && !loading && (
-          <p className="mt-2 text-center text-sm text-red-400">
-            {error}
-          </p>
+          <p className="mt-2 text-center text-sm text-red-400">{error}</p>
         )}
       </div>
     </section>
