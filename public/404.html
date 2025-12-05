@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Benjamin Mwambakulu</title>
+    <meta name="description" content="Page not found - Benjamin Mwambakulu's Portfolio">
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script>
+        // Redirect to React app for SPA routing
+        window.location.replace(window.location.origin + window.location.pathname);
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111827;
+            color: white;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ef4444, #ec4899, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #9ca3af;
+        }
+
+        .redirect-info {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .home-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #3b82f6, #06b6d4);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .home-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <div class="message">Page Not Found</div>
+        <div class="redirect-info loading">Redirecting to portfolio...</div>
+        <a href="/" class="home-link">Go to Portfolio</a>
+        <div style="margin-top: 2rem; font-size: 0.875rem; color: #4b5563;">
+            <p>Benjamin Mwambakulu - Full Stack Developer</p>
+            <p>If you're not redirected automatically, click the button above.</p>
+        </div>
+    </div>
+</body>
+
+</html>
