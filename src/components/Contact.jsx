@@ -4,14 +4,14 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase"; // existing Firestore config
 import { importImage } from "../Essentials/getImages";
 import { motion } from "motion/react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -91,9 +91,9 @@ function Contact() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -112,7 +112,9 @@ function Contact() {
     if (!serviceId || !templateId || !publicKey) {
       setIsSubmitting(false);
       setSubmitStatus("error");
-      setSubmitMessage("EmailJS configuration is missing. Please check your environment variables.");
+      setSubmitMessage(
+        "EmailJS configuration is missing. Please check your environment variables."
+      );
       setTimeout(() => {
         setSubmitStatus(null);
         setSubmitMessage("");
@@ -135,7 +137,7 @@ function Contact() {
         publicKey
       );
 
-      console.log('Email sent successfully:', result);
+      console.log("Email sent successfully:", result);
       setIsSubmitting(false);
       setSubmitStatus("success");
       setSubmitMessage("Message sent successfully! I'll get back to you soon.");
@@ -146,12 +148,13 @@ function Contact() {
         setSubmitStatus(null);
         setSubmitMessage("");
       }, 5000);
-
     } catch (error) {
-      console.error('EmailJS error:', error);
+      console.error("EmailJS error:", error);
       setIsSubmitting(false);
       setSubmitStatus("error");
-      setSubmitMessage("Failed to send message. Please try again or contact me directly via email.");
+      setSubmitMessage(
+        "Failed to send message. Please try again or contact me directly via email."
+      );
 
       // Reset status after 5 seconds
       setTimeout(() => {
@@ -184,24 +187,24 @@ function Contact() {
             className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full blur-3xl opacity-15"
             animate={{
               scale: [1, 1.1, 1],
-              rotate: [0, 180, 360]
+              rotate: [0, 180, 360],
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
           <motion.div
             className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-blue-500 rounded-full blur-2xl opacity-25 absolute top-4 left-4"
             animate={{
               y: [0, -10, 0],
-              scale: [1, 1.05, 1]
+              scale: [1, 1.05, 1],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
         </motion.div>
@@ -217,12 +220,12 @@ function Contact() {
             className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full blur-3xl opacity-20"
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.2, 0.25, 0.2]
+              opacity: [0.2, 0.25, 0.2],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
         </motion.div>
@@ -238,12 +241,12 @@ function Contact() {
             className="w-22 h-22 sm:w-30 sm:h-30 lg:w-36 lg:h-36 bg-gradient-to-r from-indigo-500 to-blue-800 rounded-full blur-3xl opacity-10"
             animate={{
               scale: [1, 1.05, 1],
-              rotate: [0, -180, -360]
+              rotate: [0, -180, -360],
             }}
             transition={{
               duration: 6,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
         </motion.div>
@@ -256,10 +259,26 @@ function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <svg
+            className="w-full h-full"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
             <defs>
-              <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 0 10 L 10 10 L 10 0 M 10 10 L 20 10 M 10 10 L 10 20" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="0.5" fill="none" />
+              <pattern
+                id="circuit"
+                x="0"
+                y="0"
+                width="20"
+                height="20"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 10 L 10 10 L 10 0 M 10 10 L 20 10 M 10 10 L 10 20"
+                  stroke="rgba(59, 130, 246, 0.3)"
+                  strokeWidth="0.5"
+                  fill="none"
+                />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit)" />
@@ -278,25 +297,25 @@ function Contact() {
             className="w-full h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent absolute top-1/3"
             animate={{
               scaleX: [0, 1, 0],
-              opacity: [0, 1, 0]
+              opacity: [0, 1, 0],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
           <motion.div
             className="w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent absolute top-2/3"
             animate={{
               scaleX: [0, 1, 0],
-              opacity: [0, 1, 0]
+              opacity: [0, 1, 0],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 1
+              delay: 1,
             }}
           />
         </motion.div>
@@ -394,15 +413,25 @@ function Contact() {
                     whileHover={{
                       scale: 1.02,
                       borderColor: "rgba(59, 130, 246, 0.5)",
-                      boxShadow: "0 4px 20px rgba(59, 130, 246, 0.1)"
+                      boxShadow: "0 4px 20px rgba(59, 130, 246, 0.1)",
                     }}
                   >
                     <motion.div
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                      <svg
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d={item.icon}
+                        />
                       </svg>
                     </motion.div>
                     <div className="min-w-0 flex-1">
@@ -462,56 +491,51 @@ function Contact() {
                     url: contactInfo.twitter,
                     icon: "twitter.png",
                   },
-                  contactInfo?.website && {
-                    name: "Website",
-                    url: contactInfo.website,
-                    icon: "supabase.png",
-                  },
                   contactInfo?.whatsapp && {
                     name: "WhatsApp",
                     url: contactInfo.whatsapp,
-                    icon: "facebook.png",
+                    icon: "whatsapp.png",
                   },
                 ]
                   .filter(Boolean)
                   .map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/50 backdrop-blur-sm rounded-full flex items-center justify-center border border-gray-700/50 hover:bg-blue-500/20 hover:border-blue-500/50 transition-all group"
-                    initial={{ opacity: 0, scale: 0, rotate: -90 }}
-                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.3,
-                      delay: 0.1 + index * 0.05,
-                      ease: "easeOut"
-                    }}
-                    whileHover={{
-                      scale: 1.2,
-                      y: -5,
-                      boxShadow: "0 8px 25px rgba(59, 130, 246, 0.3)"
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <motion.img
-                      src={importImage(social.icon)}
-                      alt={social.name}
-                      className="w-5 h-5 sm:w-6 sm:h-6"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'block';
+                    <motion.a
+                      key={index}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/50 backdrop-blur-sm rounded-full flex items-center justify-center border border-gray-700/50 hover:bg-blue-500/20 hover:border-blue-500/50 transition-all group"
+                      initial={{ opacity: 0, scale: 0, rotate: -90 }}
+                      whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.1 + index * 0.05,
+                        ease: "easeOut",
                       }}
-                    />
-                    <span className="text-blue-400 text-xs font-bold hidden">
-                      {social.name.charAt(0)}
-                    </span>
-                  </motion.a>
-                ))}
+                      whileHover={{
+                        scale: 1.2,
+                        y: -5,
+                        boxShadow: "0 8px 25px rgba(59, 130, 246, 0.3)",
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <motion.img
+                        src={importImage(social.icon)}
+                        alt={social.name}
+                        className="w-5 h-5 sm:w-6 sm:h-6"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                          e.target.nextSibling.style.display = "block";
+                        }}
+                      />
+                      <span className="text-blue-400 text-xs font-bold hidden">
+                        {social.name.charAt(0)}
+                      </span>
+                    </motion.a>
+                  ))}
               </div>
             </motion.div>
 
@@ -525,7 +549,7 @@ function Contact() {
               whileHover={{
                 scale: 1.02,
                 borderColor: "rgba(34, 197, 94, 0.5)",
-                boxShadow: "0 4px 20px rgba(34, 197, 94, 0.1)"
+                boxShadow: "0 4px 20px rgba(34, 197, 94, 0.1)",
               }}
             >
               <div className="flex items-center gap-2 justify-center lg:justify-start">
@@ -533,12 +557,12 @@ function Contact() {
                   className="w-3 h-3 bg-green-400 rounded-full"
                   animate={{
                     scale: [1, 1.1, 1],
-                    opacity: [1, 0.7, 1]
+                    opacity: [1, 0.7, 1],
                   }}
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                 />
                 <p className="text-green-400 font-semibold text-sm sm:text-base">
@@ -557,7 +581,7 @@ function Contact() {
             transition={{ duration: 0.4, delay: 0.3 }}
             whileHover={{
               borderColor: "rgba(59, 130, 246, 0.5)",
-              boxShadow: "0 8px 32px rgba(59, 130, 246, 0.1)"
+              boxShadow: "0 8px 32px rgba(59, 130, 246, 0.1)",
             }}
           >
             {/* Form Glow Effect */}
@@ -577,10 +601,16 @@ function Contact() {
               Send Me a Message
             </motion.h3>
 
-            <form onSubmit={handleSubmit} className="relative space-y-4 sm:space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="relative space-y-4 sm:space-y-6"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="group">
-                  <label htmlFor="name" className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors">
+                  <label
+                    htmlFor="name"
+                    className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors"
+                  >
                     Name *
                   </label>
                   <input
@@ -596,7 +626,10 @@ function Contact() {
                 </div>
 
                 <div className="group">
-                  <label htmlFor="email" className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors">
+                  <label
+                    htmlFor="email"
+                    className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors"
+                  >
                     Email *
                   </label>
                   <input
@@ -613,7 +646,10 @@ function Contact() {
               </div>
 
               <div className="group">
-                <label htmlFor="subject" className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors">
+                <label
+                  htmlFor="subject"
+                  className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors"
+                >
                   Subject *
                 </label>
                 <input
@@ -629,7 +665,10 @@ function Contact() {
               </div>
 
               <div className="group">
-                <label htmlFor="message" className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors">
+                <label
+                  htmlFor="message"
+                  className="block text-xs sm:text-sm font-semibold text-blue-300 mb-2 group-focus-within:text-cyan-300 transition-colors"
+                >
                   Message *
                 </label>
                 <textarea
@@ -652,9 +691,24 @@ function Contact() {
                 <span className="relative z-10 flex items-center gap-2">
                   {isSubmitting ? (
                     <>
-                      <svg className="animate-spin w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin w-4 h-4 sm:w-5 sm:h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Sending...
                     </>
@@ -667,16 +721,22 @@ function Contact() {
 
               {submitStatus && (
                 <motion.div
-                  className={`p-3 sm:p-4 rounded-lg border ${submitStatus === "success"
-                    ? "bg-green-500/10 border-green-500/30"
-                    : "bg-red-500/10 border-red-500/30"
-                    }`}
+                  className={`p-3 sm:p-4 rounded-lg border ${
+                    submitStatus === "success"
+                      ? "bg-green-500/10 border-green-500/30"
+                      : "bg-red-500/10 border-red-500/30"
+                  }`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className={`text-center font-semibold text-sm sm:text-base ${submitStatus === "success" ? "text-green-400" : "text-red-400"
-                    }`}>
+                  <p
+                    className={`text-center font-semibold text-sm sm:text-base ${
+                      submitStatus === "success"
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
                     {submitMessage}
                   </p>
                 </motion.div>
