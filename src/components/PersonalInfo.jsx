@@ -249,8 +249,20 @@ function PersonalInfo() {
                   aboutData?.imageUrl ||
                   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23374151'/%3E%3Ctext x='150' y='200' text-anchor='middle' dy='.3em' fill='%236B7280' font-family='monospace' font-size='16'%3EProfile Image%3C/text%3E%3C/svg%3E"
                 }
+                srcSet={
+                  // If aboutData.imageUrl is provided, we assume it's the high-res version. 
+                  // In a real-world scenario, you would provide multiple URLs here (e.g., small, medium, large).
+                  // For now, we rely on the sizes attribute to hint layout, and the user to provide a properly sized image.
+                  undefined 
+                }
+                sizes="(max-width: 640px) 256px, (max-width: 1024px) 320px, 384px"
                 className="rounded-2xl w-64 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-112 object-cover object-top shadow-2xl"
-                alt="profile image"
+                style={{ 
+                  imageRendering: "auto", // Ensure standard high-quality scaling
+                }}
+                alt={aboutData?.title ? `${aboutData.title} Profile` : "Profile image"}
+                loading="lazy"
+                decoding="async"
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}

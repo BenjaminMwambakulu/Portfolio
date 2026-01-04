@@ -79,11 +79,11 @@ function HeroSection() {
             style={{
               backgroundImage: `url(${watermarkUrl})`,
               maskImage:
-                "radial-gradient(circle at center, rgba(0,0,0,0.7), transparent 75%)",
+                "radial-gradient(circle at center, rgba(0,0,0,0.5), transparent 60%)",
               WebkitMaskImage:
-                "radial-gradient(circle at center, rgba(0,0,0,0.7), transparent 75%)",
-              opacity: 0.95,
-              filter: "saturate(0.9)",
+                "radial-gradient(circle at center, rgba(0,0,0,0.5), transparent 60%)",
+              opacity: 0.30,
+              filter: "saturate(0.7) brightness(1.1)",
             }}
           />
         </motion.div>
