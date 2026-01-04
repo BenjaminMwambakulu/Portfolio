@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
-import { db } from "../config/firebase"; // existing Firestore config
+// removed direct firestore imports in favor of services
+import { getAboutSection } from "../Services/AboutSectionService";
+import { getSkillsSection } from "../Services/SkillsSectionService";
 import { motion } from "motion/react";
 
 function PersonalInfo() {
@@ -23,56 +17,53 @@ function PersonalInfo() {
   useEffect(() => {
     const fetchAboutAndSkills = async () => {
       try {
-        // Read About section from Firestore: sectionData/aboutSection
-        const aboutRef = doc(db, "sectionData", "aboutSection");
-        const aboutSnap = await getDoc(aboutRef);
-
+        // Fetch About Data
+        const aboutResult = await getAboutSection();
         let about = null;
-        if (aboutSnap.exists()) {
-          const data = aboutSnap.data();
-          about = {
-            title: data.title || "About Me",
-            subtitle:
-              data.description ||
-              "I am a full-stack developer passionate about building modern web applications.",
-            imageUrl: data.imageUrl || null,
-          };
+        if (aboutResult.success && aboutResult.data) {
+           about = {
+            title: aboutResult.data.title || "About Me",
+            subtitle: aboutResult.data.description || "I am a full-stack developer passionate about building modern web applications.",
+            imageUrl: aboutResult.data.imageUrl || null,
+           };
         } else {
-          // Fallback if document does not exist
-          about = {
-            title: "About Me",
-            subtitle:
-              "I am a full-stack developer passionate about building modern web applications.",
-            imageUrl: null,
-          };
+             // Fallback
+             about = {
+                title: "About Me",
+                subtitle: "I am a full-stack developer passionate about building modern web applications.",
+                imageUrl: null,
+              };
         }
 
-        // Read Skills from Firestore: sectionData where documentType == "skill"
-        const sectionRef = collection(db, "sectionData");
-        const skillsQuery = query(
-          sectionRef,
-          where("documentType", "==", "skill")
-        );
-        const skillsSnap = await getDocs(skillsQuery);
-
+        // Fetch Skills Data
+        const skillsResult = await getSkillsSection();
         const groupedSkills = {};
-        skillsSnap.forEach((docSnap) => {
-          const data = docSnap.data();
-          const category = data.category || "Tools";
-          if (!groupedSkills[category]) groupedSkills[category] = [];
-          groupedSkills[category].push({
-            id: docSnap.id,
-            name: data.name,
-            iconUrl: data.iconUrl || "",
-            description: data.description || "",
-            proficiency: data.proficiency || "",
-          });
-        });
+        
+        if (skillsResult.success && skillsResult.data && Array.isArray(skillsResult.data.skills)) {
+            skillsResult.data.skills.forEach(skill => {
+                 const category = skill.category || "Tools"; // Admin uses "Tool"
+                 // Ensure category matches what renderSkills expects ("Tool", "Other", etc from Admin are fine if used correctly in keys)
+                 // But notice renderSkills calls: skillsByCategory["Tool"] (singular)
+                 // Admin saves "Tool" (singular) for tools.
+                 // Admin saves "Other" (singular) for others.
+                 // Admin saves "Backend", "Frontend", "Mobile", "Database".
+                 // So keys should be fine.
+                 
+                 if (!groupedSkills[category]) groupedSkills[category] = [];
+                 groupedSkills[category].push({
+                    id: skill.id,
+                    name: skill.name,
+                    iconUrl: skill.iconPath || "",
+                    description: "", // Admin doesn't have description per skill
+                    proficiency: skill.experience || "",
+                 });
+            });
+        }
 
         setAboutData(about);
         setSkillsByCategory(groupedSkills);
       } catch (err) {
-        console.error("Error fetching about/skills from Firestore:", err);
+        console.error("Error fetching about/skills:", err);
         setError("Unable to load about and skills information.");
       } finally {
         setLoading(false);
@@ -258,7 +249,7 @@ function PersonalInfo() {
                   aboutData?.imageUrl ||
                   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23374151'/%3E%3Ctext x='150' y='200' text-anchor='middle' dy='.3em' fill='%236B7280' font-family='monospace' font-size='16'%3EProfile Image%3C/text%3E%3C/svg%3E"
                 }
-                className="rounded-2xl w-64 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-[28rem] object-cover object-top shadow-2xl"
+                className="rounded-2xl w-64 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-112 object-cover object-top shadow-2xl"
                 alt="profile image"
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
@@ -271,7 +262,7 @@ function PersonalInfo() {
               />
               {/* Decorative border */}
               <motion.div
-                className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-blue-600/20 rounded-3xl -z-10 blur-xl"
+                className="absolute -inset-4 bg-linear-to-r from-blue-500/20 to-blue-600/20 rounded-3xl -z-10 blur-xl"
                 animate={{
                   scale: [1, 1.05, 1],
                   opacity: [0.2, 0.3, 0.2],

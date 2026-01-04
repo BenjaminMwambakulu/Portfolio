@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
-import { db } from "../config/firebase"; // existing Firestore config
+// removed direct firestore imports in favor of service
+import { getHeroSection } from "../Services/HeroSectionService";
+import { getAboutSection } from "../Services/AboutSectionService";
 import { motion } from "motion/react";
-import profileImg from "../assets/icons/profile.jpg"; // fallback watermark image (matches About section)
+import profileImg from "../assets/icons/profile.jpg"; // fallback watermark image
 
 function HeroSection() {
   // Firestore state for hero section
@@ -22,38 +16,33 @@ function HeroSection() {
   useEffect(() => {
     const fetchHeroSection = async () => {
       try {
-        // Read hero section from Firestore: sectionData where documentType == "heroSection"
-        const sectionRef = collection(db, "sectionData");
-        const q = query(sectionRef, where("documentType", "==", "heroSection"));
-        const snapshot = await getDocs(q);
-
-        if (!snapshot.empty) {
-          // Use the first matching heroSection document
-          const docData = snapshot.docs[0].data();
+        const result = await getHeroSection();
+        
+        if (result.success && result.data) {
           setHeroData({
-            title: docData.title,
-            subtitle: docData.description,
+            title: result.data.title,
+            subtitle: result.data.description,
           });
+          
+          if (result.data.imageUrl) {
+            setWatermarkUrl(result.data.imageUrl);
+          } else {
+             // If no hero image, try to get about image
+             const aboutResult = await getAboutSection();
+             if (aboutResult.success && aboutResult.data && aboutResult.data.imageUrl) {
+                 setWatermarkUrl(aboutResult.data.imageUrl);
+             }
+          }
         } else {
-          // No heroSection found – fall back to sensible defaults
+          // Fallback if no data found
           setHeroData({
             title: "Hi, I'm Benjamin, a Full Stack Developer",
             subtitle:
               "Full-Stack Developer | Passionate about Web & Software Development",
           });
         }
-
-        // Fetch About section image to use as watermark (keeps hero and about in sync)
-        const aboutRef = doc(db, "sectionData", "aboutSection");
-        const aboutSnap = await getDoc(aboutRef);
-        if (aboutSnap.exists()) {
-          const aboutImage = aboutSnap.data().imageUrl;
-          if (aboutImage) {
-            setWatermarkUrl(aboutImage);
-          }
-        }
       } catch (err) {
-        console.error("Error fetching hero section from Firestore:", err);
+        console.error("Error fetching hero section:", err);
         setError("Unable to load hero content.");
         // Fallback content to keep layout intact
         setHeroData({

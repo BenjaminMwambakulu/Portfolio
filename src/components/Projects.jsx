@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase"; // existing Firestore config
+// removed direct firestore imports in favor of service
+import { getProjectsSection } from "../Services/ProjectsSectionService";
 import { motion, AnimatePresence } from "motion/react";
 
 function Projects() {
@@ -16,35 +16,33 @@ function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // Read all projects from Firestore: projects collection
-        const projectsRef = collection(db, "projects");
-        const snapshot = await getDocs(projectsRef);
-
-        const loaded = [];
-        snapshot.forEach((docSnap) => {
-          const data = docSnap.data();
-
-          // Only display projects where isPublic !== false
-          if (data.isPublic === false) return;
-
-          loaded.push({
-            id: docSnap.id,
-            name: data.name,
-            description: data.description,
-            technologies: Array.isArray(data.technologies)
-              ? data.technologies
-              : [],
-            githubUrl: data.githubUrl || "",
-            liveUrl: data.liveUrl || "",
-            isFeatured: !!data.isFeatured,
-            images: Array.isArray(data.images) ? data.images : [],
-            category: data.category || "Full Stack",
-          });
-        });
-
-        setProjects(loaded);
+        const result = await getProjectsSection();
+        
+        if(result.success && result.data && result.data.projects) {
+             const loaded = result.data.projects.map(data => {
+                let category = "Full Stack";
+                if(data.projectType === "frontend") category = "Frontend";
+                if(data.projectType === "backend") category = "Backend";
+                
+                return {
+                    id: data.id,
+                    name: data.title,
+                    description: data.description,
+                    technologies: Array.isArray(data.technologies) ? data.technologies : [],
+                    githubUrl: data.githubUrl || "",
+                    liveUrl: data.liveUrl || "",
+                    isFeatured: false, // Admin doesn't support featured flag yet
+                    images: Array.isArray(data.imageUrls) ? data.imageUrls : [],
+                    category: category
+                }
+             });
+             setProjects(loaded);
+        } else {
+            console.log("No projects found or error reading structure");
+             setProjects([]);
+        }
       } catch (err) {
-        console.error("Error fetching projects from Firestore:", err);
+        console.error("Error fetching projects:", err);
         setError("Unable to load projects at this time.");
       } finally {
         setLoading(false);

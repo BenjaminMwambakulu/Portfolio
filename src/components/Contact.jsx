@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../config/firebase"; // existing Firestore config
+// removed direct firestore imports in favor of service
+import { getContactSection } from "../Services/ContactSectionService";
 import { importImage } from "../Essentials/getImages";
 import { motion } from "motion/react";
 import emailjs from "@emailjs/browser";
@@ -26,12 +26,10 @@ function Contact() {
   useEffect(() => {
     const fetchContactSection = async () => {
       try {
-        // Read contact section from Firestore: sectionData/contactSection
-        const contactRef = doc(db, "sectionData", "contactSection");
-        const contactSnap = await getDoc(contactRef);
+        const result = await getContactSection();
 
-        if (contactSnap.exists()) {
-          const data = contactSnap.data();
+        if (result.success && result.data) {
+          const data = result.data;
           setContactInfo({
             heading: data.heading || "Let's Work Together",
             subheading:
@@ -65,7 +63,7 @@ function Contact() {
           });
         }
       } catch (err) {
-        console.error("Error fetching contact section from Firestore:", err);
+        console.error("Error fetching contact section:", err);
         setContactError("Unable to load contact information.");
         setContactInfo({
           heading: "Let's Work Together",
