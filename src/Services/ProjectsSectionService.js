@@ -1,10 +1,35 @@
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, limit, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 export const getProjectsSection = async () => {
     try {
-        const projectsSectionRef = collection(db, "Sections", "projects", 'items');
+        // Try to get data from the new structure first (individual docs)
+        const projectListRef = collection(db, "Sections", "projects", "projectList");
+        const qProjectList = query(projectListRef, orderBy("index"));
+        const projectListSnapshot = await getDocs(qProjectList);
 
+        if (!projectListSnapshot.empty) {
+            const projects = projectListSnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            // Get layout
+            const layoutDocRef = doc(db, "Sections", "projects");
+            const layoutDoc = await getDoc(layoutDocRef);
+            const layout = layoutDoc.exists() ? layoutDoc.data().layout : "layout1";
+
+            return {
+                success: true,
+                data: {
+                    layout,
+                    projects
+                }
+            };
+        }
+
+        // Fallback: Check for the legacy structure (snapshot documents)
+        const projectsSectionRef = collection(db, "Sections", "projects", 'items');
         // Query to get the most recent projects section document
         const q = query(projectsSectionRef, orderBy("updatedAt", "desc"), limit(1));
         const querySnapshot = await getDocs(q);
@@ -13,10 +38,10 @@ export const getProjectsSection = async () => {
             return { success: true, data: null };
         }
 
-        const doc = querySnapshot.docs[0];
+        const docSnapshot = querySnapshot.docs[0];
         const data = {
-            id: doc.id,
-            ...doc.data(),
+            id: docSnapshot.id,
+            ...docSnapshot.data(),
         };
 
         return { success: true, data };

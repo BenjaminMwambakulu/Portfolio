@@ -1,4 +1,4 @@
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, limit, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 export const getContactSection = async () => {
@@ -22,6 +22,21 @@ export const getContactSection = async () => {
         return { success: true, data };
     } catch (error) {
         console.error("Error fetching contact section:", error);
+        return { success: false, error: error.message };
+    }
+};
+
+export const addMessage = async (messageData) => {
+    try {
+        const messagesRef = collection(db, "Messages");
+        await addDoc(messagesRef, {
+            ...messageData,
+            createdAt: serverTimestamp(),
+            read: false
+        });
+        return { success: true };
+    } catch (error) {
+        console.error("Error sending message:", error);
         return { success: false, error: error.message };
     }
 };

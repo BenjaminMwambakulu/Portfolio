@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // Firestore imports
 // removed direct firestore imports in favor of service
-import { getContactSection } from "../Services/ContactSectionService";
+import { getContactSection, addMessage } from "../Services/ContactSectionService";
 import { importImage } from "../Essentials/getImages";
 import { motion } from "motion/react";
 import emailjs from "@emailjs/browser";
@@ -31,17 +31,20 @@ function Contact() {
         if (result.success && result.data) {
           const data = result.data;
           setContactInfo({
-            heading: data.heading || "Let's Work Together",
+            heading: data.title || data.heading || "Let's Work Together",
             subheading:
+              data.description ||
               data.subheading ||
               "I'm always interested in new opportunities and collaborations. Whether you have a project in mind or just want to connect, feel free to reach out!",
             email: data.email || "",
             phone: data.phone || "",
             location: data.location || "",
             website: data.website || "",
-            github: data.github || "",
-            linkedin: data.linkedin || "",
-            twitter: data.twitter || "",
+            github: data.socialLinks?.github || data.github || "",
+            linkedin: data.socialLinks?.linkedin || data.linkedin || "",
+            twitter: data.socialLinks?.twitter || data.twitter || "",
+            instagram: data.socialLinks?.instagram || "",
+            facebook: data.socialLinks?.facebook || "",
             whatsapp: data.whatsapp || "",
             availability: data.availability || "Available where needed",
           });
@@ -58,6 +61,8 @@ function Contact() {
             github: "",
             linkedin: "",
             twitter: "",
+            instagram: "",
+            facebook: "",
             whatsapp: "",
             availability: "Available where needed",
           });
@@ -136,6 +141,15 @@ function Contact() {
       );
 
       console.log("Email sent successfully:", result);
+
+      // Save to Firestore
+      await addMessage({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+      });
+
       setIsSubmitting(false);
       setSubmitStatus("success");
       setSubmitMessage("Message sent successfully! I'll get back to you soon.");
@@ -488,6 +502,16 @@ function Contact() {
                     name: "Twitter",
                     url: contactInfo.twitter,
                     icon: "twitter.png",
+                  },
+                  contactInfo?.instagram && {
+                    name: "Instagram",
+                    url: contactInfo.instagram,
+                    icon: "instagram.png",
+                  },
+                  contactInfo?.facebook && {
+                    name: "Facebook",
+                    url: contactInfo.facebook,
+                    icon: "facebook.png",
                   },
                   contactInfo?.whatsapp && {
                     name: "WhatsApp",
